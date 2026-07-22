@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Download, FileText, Calendar, Link as LinkIcon, Check, AlertCircle } from 'lucide-react';
+import { Download, FileText, Calendar, AlertCircle } from 'lucide-react';
 import Reveal from './Reveal';
 import { useLang } from '@/i18n';
 
@@ -8,8 +8,8 @@ export default function DownloadSection() {
   const d = t.download;
   const [loader, setLoader] = useState<'fabric' | 'forge'>('fabric');
   
-  // SEU LINK DO DROPBOX AQUI: Cole o link direto do seu arquivo no Dropbox dentro das aspas
-  const [dropboxUrl, setDropboxUrl] = useState('https://www.dropbox.com/scl/fi/ru8qcgvnad6bgnf7dbjgw/vanilla-voice-mod-mc-1.21.11.fabric.jar?rlkey=396v7um2u05yc2q2tiptpvzkz&st=5gu3gl3z&dl=1');
+  // Link direto do Dropbox com ?raw=1 para baixar instantaneamente
+  const [dropboxUrl] = useState('https://www.dropbox.com/scl/fi/ru8qcgvnad6bgnf7dbjgw/vanilla-voice-mod-mc-1.21.11.fabric.jar?rlkey=396v7um2u05yc2q2tiptpvzkz&st=5gu3gl3z&raw=1');
 
   return (
     <section id="download" className="relative py-28 sm:py-36">
@@ -71,12 +71,10 @@ export default function DownloadSection() {
                 </div>
                 <p className="text-gray-400 text-sm mb-4">{d.meta}</p>
                 
-                {dropboxUrl && dropboxUrl !== 'COLE_SEU_LINK_DO_DROPBOX_AQUI' ? (
+                {dropboxUrl ? (
                   <div className="flex flex-col sm:flex-row gap-3 justify-center sm:justify-start">
                     <a
                       href={dropboxUrl}
-                      target="_blank"
-                      rel="noreferrer"
                       className="btn-shimmer inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-green-500 to-emerald-500 text-[#06240f] font-bold text-sm hover:shadow-[0_0_30px_-5px_rgba(74,222,128,0.6)] transition-shadow"
                     >
                       <Download className="w-4 h-4" strokeWidth={2.5} />
@@ -94,7 +92,7 @@ export default function DownloadSection() {
                   <div className="flex items-center justify-between gap-2 px-4 py-3 rounded-xl bg-yellow-500/10 border border-yellow-500/20 text-yellow-300/80 text-sm">
                     <div className="flex items-center gap-2">
                       <AlertCircle className="w-4 h-4 flex-shrink-0" />
-                      <span>Substitua 'COLE_SEU_LINK_DO_DROPBOX_AQUI' no código pelo seu link do Dropbox.</span>
+                      <span>Link de download indisponível.</span>
                     </div>
                   </div>
                 )}

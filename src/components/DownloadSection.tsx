@@ -8,9 +8,8 @@ export default function DownloadSection() {
   const d = t.download;
   const [loader, setLoader] = useState<'fabric' | 'forge'>('fabric');
   
-  // Link único do Dropbox para o download principal
-  const [dropboxUrl, setDropboxUrl] = useState('WWWW');
-  const [isEditing, setIsEditing] = useState(false);
+  // SEU LINK DO DROPBOX AQUI: Cole o link direto do seu arquivo no Dropbox dentro das aspas
+  const [dropboxUrl, setDropboxUrl] = useState('https://www.dropbox.com/scl/fi/ru8qcgvnad6bgnf7dbjgw/vanilla-voice-mod-mc-1.21.11.fabric.jar?rlkey=396v7um2u05yc2q2tiptpvzkz&st=5gu3gl3z&dl=1');
 
   return (
     <section id="download" className="relative py-28 sm:py-36">
@@ -69,22 +68,10 @@ export default function DownloadSection() {
                   <span className="px-2.5 py-1 rounded-full bg-gray-700/40 text-xs font-semibold text-gray-300 capitalize">
                     {loader}
                   </span>
-                  <button
-                    onClick={() => setIsEditing(!isEditing)}
-                    className={`inline-flex items-center gap-1 text-xs font-medium transition-colors px-2.5 py-1 rounded-lg ml-auto ${
-                      isEditing
-                        ? 'bg-green-500/15 text-green-400'
-                        : 'text-gray-500 hover:text-green-400 hover:bg-green-500/10'
-                    }`}
-                    title="Configurar Link"
-                  >
-                    {isEditing ? <Check className="w-3.5 h-3.5" /> : <LinkIcon className="w-3.5 h-3.5" />}
-                    {isEditing ? 'Pronto' : 'Configurar Link'}
-                  </button>
                 </div>
                 <p className="text-gray-400 text-sm mb-4">{d.meta}</p>
                 
-                {dropboxUrl ? (
+                {dropboxUrl && dropboxUrl !== 'COLE_SEU_LINK_DO_DROPBOX_AQUI' ? (
                   <div className="flex flex-col sm:flex-row gap-3 justify-center sm:justify-start">
                     <a
                       href={dropboxUrl}
@@ -107,22 +94,7 @@ export default function DownloadSection() {
                   <div className="flex items-center justify-between gap-2 px-4 py-3 rounded-xl bg-yellow-500/10 border border-yellow-500/20 text-yellow-300/80 text-sm">
                     <div className="flex items-center gap-2">
                       <AlertCircle className="w-4 h-4 flex-shrink-0" />
-                      <span>Cole o link do Dropbox clicando em "Configurar Link" acima.</span>
-                    </div>
-                  </div>
-                )}
-
-                {isEditing && (
-                  <div className="mt-4 space-y-2 border-t border-green-500/10 pt-4">
-                    <div className="flex items-center gap-2">
-                      <LinkIcon className="w-3.5 h-3.5 text-green-400 flex-shrink-0" />
-                      <input
-                        type="url"
-                        placeholder="Cole o link do Dropbox aqui (ex: https://www.dropbox.com/...)"
-                        value={dropboxUrl}
-                        onChange={(e) => setDropboxUrl(e.target.value)}
-                        className="flex-1 min-w-0 bg-black/30 border border-green-500/15 rounded-lg px-3 py-1.5 text-xs text-gray-300 placeholder-gray-600 focus:outline-none focus:border-green-500/40 transition-colors"
-                      />
+                      <span>Substitua 'COLE_SEU_LINK_DO_DROPBOX_AQUI' no código pelo seu link do Dropbox.</span>
                     </div>
                   </div>
                 )}
@@ -131,7 +103,7 @@ export default function DownloadSection() {
           </div>
         </Reveal>
 
-        {/* Previous releases (apenas exibição sem botões de links complexos) */}
+        {/* Previous releases */}
         <div className="mt-10 grid md:grid-cols-3 gap-5 max-w-5xl mx-auto">
           {d.releases.map((r, i) => {
             const tagLabel = r.tag === 'Latest' ? d.latest : r.tag === 'Stable' ? d.stable : d.legacy;

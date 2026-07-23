@@ -5,26 +5,26 @@ import { useLang } from '@/i18n';
 
 interface ReleaseLink { fabric: string; forge: string }
 
-// Defina aqui os links do Dropbox para cada versão anterior (índice 0 é a mais recente/principal, 1 e 2 são as anteriores)
+// Defina aqui os links do Dropbox para cada versão (Fabric e Forge)
 const releaseLinksData: ReleaseLink[] = [
   { 
     fabric: 'https://www.dropbox.com/scl/fi/ru8qcgvnad6bgnf7dbjgw/vanilla-voice-mod-mc-1.21.11.fabric.jar?rlkey=396v7um2u05yc2q2tiptpvzkz&st=5gu3gl3z&raw=1', 
-    forge: '' 
+    forge: 'https://www.dropbox.com/scl/fi/EXEMPLO_FORGE_PRINCIPAL/arquivo.jar?rlkey=EXEMPLO&raw=1' 
   },
   { 
-    fabric: 'https://www.dropbox.com/scl/fi/EXEMPLO_LINK_VERSAO_ANTERIOR_1/arquivo.jar?rlkey=EXEMPLO&raw=1', 
-    forge: '' 
+    fabric: 'https://www.dropbox.com/scl/fi/EXEMPLO_FABRIC_VERSAO_1/arquivo.jar?rlkey=EXEMPLO&raw=1', 
+    forge: 'https://www.dropbox.com/scl/fi/EXEMPLO_FORGE_VERSAO_1/arquivo.jar?rlkey=EXEMPLO&raw=1' 
   },
   { 
-    fabric: 'https://www.dropbox.com/scl/fi/EXEMPLO_LINK_VERSAO_ANTERIOR_2/arquivo.jar?rlkey=EXEMPLO&raw=1', 
-    forge: '' 
+    fabric: 'https://www.dropbox.com/scl/fi/EXEMPLO_FABRIC_VERSAO_2/arquivo.jar?rlkey=EXEMPLO&raw=1', 
+    forge: 'https://www.dropbox.com/scl/fi/EXEMPLO_FORGE_VERSAO_2/arquivo.jar?rlkey=EXEMPLO&raw=1' 
   },
 ];
 
 const LOCAL_JARS: Record<string, { fabric: string; forge: string }> = {
   '2.5.1': {
     fabric: 'https://www.dropbox.com/scl/fi/ru8qcgvnad6bgnf7dbjgw/vanilla-voice-mod-mc-1.21.11.fabric.jar?rlkey=396v7um2u05yc2q2tiptpvzkz&st=5gu3gl3z&raw=1',
-    forge: '',
+    forge: 'https://www.dropbox.com/scl/fi/EXEMPLO_FORGE_PRINCIPAL/arquivo.jar?rlkey=EXEMPLO&raw=1',
   },
 };
 

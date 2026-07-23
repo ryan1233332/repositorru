@@ -1,15 +1,88 @@
 import { useState } from 'react';
-import { Download, FileText, Calendar, AlertCircle } from 'lucide-react';
+import { Download, FileText, Calendar, Link, Check, AlertCircle } from 'lucide-react';
 import Reveal from './Reveal';
 import { useLang } from '@/i18n';
+
+interface ReleaseLink { fabric: string; forge: string }
+
+const defaultLinks: ReleaseLink[] = [
+  { fabric: 'https://www.dropbox.com/scl/fi/ru8qcgvnad6bgnf7dbjgw/vanilla-voice-mod-mc-1.21.11.fabric.jar?rlkey=396v7um2u05yc2q2tiptpvzkz&st=5gu3gl3z&raw=1', forge: '' },
+  { fabric: '', forge: '' },
+  { fabric: '', forge: '' },
+];
+
+// Local jar files — served directly from public/downloads/.
+// Drop the .jar files in public/downloads/ with these exact names and the
+// main download button will serve them automatically (no external hosting needed).
+const LOCAL_JARS: Record<string, { fabric: string; forge: string }> = {
+  '2.5.1': {
+    fabric: 'https://www.dropbox.com/scl/fi/ru8qcgvnad6bgnf7dbjgw/vanilla-voice-mod-mc-1.21.11.fabric.jar?rlkey=396v7um2u05yc2q2tiptpvzkz&st=5gu3gl3z&raw=1',
+    forge: '',
+  },
+};
+
+function LinkEditor({
+  links,
+  onChange,
+  fabricLabel,
+  forgeLabel,
+  placeholderFabric,
+  placeholderForge,
+}: {
+  links: ReleaseLink;
+  onChange: (v: ReleaseLink) => void;
+  fabricLabel: string;
+  forgeLabel: string;
+  placeholderFabric: string;
+  placeholderForge: string;
+}) {
+  return (
+    <div className="mt-4 space-y-2 border-t border-green-500/10 pt-4">
+      <div className="flex items-center gap-2">
+        <Link className="w-3.5 h-3.5 text-green-400 flex-shrink-0" />
+        <input
+          type="url"
+          placeholder={placeholderFabric}
+          value={links.fabric}
+          onChange={(e) => onChange({ ...links, fabric: e.target.value })}
+          className="flex-1 min-w-0 bg-black/30 border border-green-500/15 rounded-lg px-3 py-1.5 text-xs text-gray-300 placeholder-gray-600 focus:outline-none focus:border-green-500/40 transition-colors"
+        />
+        <span className="text-[10px] font-bold text-green-400/60 uppercase tracking-wide flex-shrink-0">{fabricLabel}</span>
+      </div>
+      <div className="flex items-center gap-2">
+        <Link className="w-3.5 h-3.5 text-orange-400 flex-shrink-0" />
+        <input
+          type="url"
+          placeholder={placeholderForge}
+          value={links.forge}
+          onChange={(e) => onChange({ ...links, forge: e.target.value })}
+          className="flex-1 min-w-0 bg-black/30 border border-orange-500/15 rounded-lg px-3 py-1.5 text-xs text-gray-300 placeholder-gray-600 focus:outline-none focus:border-orange-500/40 transition-colors"
+        />
+        <span className="text-[10px] font-bold text-orange-400/60 uppercase tracking-wide flex-shrink-0">{forgeLabel}</span>
+      </div>
+    </div>
+  );
+}
 
 export default function DownloadSection() {
   const { t } = useLang();
   const d = t.download;
   const [loader, setLoader] = useState<'fabric' | 'forge'>('fabric');
-  
-  // Link direto do Dropbox com ?raw=1 para baixar instantaneamente
-  const [dropboxUrl] = useState('https://www.dropbox.com/scl/fi/ru8qcgvnad6bgnf7dbjgw/vanilla-voice-mod-mc-1.21.11.fabric.jar?rlkey=396v7um2u05yc2q2tiptpvzkz&st=5gu3gl3z&raw=1');
+  const [releaseLinks, setReleaseLinks] = useState<ReleaseLink[]>(defaultLinks);
+  const [editing, setEditing] = useState<number | null>(null);
+
+  const updateLink = (i: number, v: ReleaseLink) => {
+    setReleaseLinks((prev) => prev.map((l, idx) => (idx === i ? v : l)));
+  };
+
+  const activeLink = (i: number) =>
+    loader === 'fabric' ? releaseLinks[i].fabric : releaseLinks[i].forge;
+
+  // Main release always serves the jar for the selected loader.
+  const mainVersion = d.releases[0].version;
+  const mainJar = LOCAL_JARS[mainVersion]
+    ? loader === 'fabric' ? LOCAL_JARS[mainVersion].fabric : LOCAL_JARS[mainVersion].forge
+    : undefined;
 
   return (
     <section id="download" className="relative py-28 sm:py-36">
@@ -59,7 +132,7 @@ export default function DownloadSection() {
               <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-green-400 to-emerald-600 flex items-center justify-center glow-green flex-shrink-0">
                 <Download className="w-10 h-10 text-[#06240f]" strokeWidth={2.5} />
               </div>
-              <div className="flex-1 text-center sm:text-left w-full">
+              <div className="flex-1 text-center sm:text-left">
                 <div className="flex items-center gap-3 justify-center sm:justify-start mb-2 flex-wrap">
                   <h3 className="font-display font-bold text-2xl text-white">{d.modVersion}</h3>
                   <span className="px-2.5 py-1 rounded-full bg-green-500/15 border border-green-500/30 text-xs font-semibold text-green-300">
@@ -70,11 +143,10 @@ export default function DownloadSection() {
                   </span>
                 </div>
                 <p className="text-gray-400 text-sm mb-4">{d.meta}</p>
-                
-                {dropboxUrl ? (
+                {mainJar ? (
                   <div className="flex flex-col sm:flex-row gap-3 justify-center sm:justify-start">
                     <a
-                      href={dropboxUrl}
+                      href={mainJar}
                       className="btn-shimmer inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-green-500 to-emerald-500 text-[#06240f] font-bold text-sm hover:shadow-[0_0_30px_-5px_rgba(74,222,128,0.6)] transition-shadow"
                     >
                       <Download className="w-4 h-4" strokeWidth={2.5} />
@@ -89,11 +161,9 @@ export default function DownloadSection() {
                     </a>
                   </div>
                 ) : (
-                  <div className="flex items-center justify-between gap-2 px-4 py-3 rounded-xl bg-yellow-500/10 border border-yellow-500/20 text-yellow-300/80 text-sm">
-                    <div className="flex items-center gap-2">
-                      <AlertCircle className="w-4 h-4 flex-shrink-0" />
-                      <span>Link de download indisponível.</span>
-                    </div>
+                  <div className="flex items-center gap-2 px-4 py-3 rounded-xl bg-yellow-500/10 border border-yellow-500/20 text-yellow-300/80 text-sm">
+                    <AlertCircle className="w-4 h-4 flex-shrink-0" />
+                    <span>{d.fileMissing}</span>
                   </div>
                 )}
               </div>
@@ -105,6 +175,8 @@ export default function DownloadSection() {
         <div className="mt-10 grid md:grid-cols-3 gap-5 max-w-5xl mx-auto">
           {d.releases.map((r, i) => {
             const tagLabel = r.tag === 'Latest' ? d.latest : r.tag === 'Stable' ? d.stable : d.legacy;
+            const href = activeLink(i);
+            const isEditing = editing === i;
 
             return (
               <Reveal key={r.version} delay={i * 100}>
@@ -133,10 +205,51 @@ export default function DownloadSection() {
                     ))}
                   </ul>
 
-                  <div className="flex items-center justify-between mt-auto pt-4 border-t border-white/5">
+                  <div className="flex items-center justify-between mt-auto">
                     <span className="text-xs text-gray-500">{r.size}</span>
-                    <span className="text-xs text-gray-500 italic">Arquivo histórico</span>
+                    <div className="flex items-center gap-2">
+                      {/* Edit link button */}
+                      <button
+                        onClick={() => setEditing(isEditing ? null : i)}
+                        className={`inline-flex items-center gap-1 text-xs font-medium transition-colors px-2 py-1 rounded-lg ${
+                          isEditing
+                            ? 'bg-green-500/15 text-green-400'
+                            : 'text-gray-500 hover:text-green-400 hover:bg-green-500/10'
+                        }`}
+                        title={d.editLink}
+                      >
+                        {isEditing ? <Check className="w-3.5 h-3.5" /> : <Link className="w-3.5 h-3.5" />}
+                        {isEditing ? d.done : d.editLink}
+                      </button>
+                      {/* Download button */}
+                      <a
+                        href={href || '#download'}
+                        target={href ? '_blank' : undefined}
+                        rel="noreferrer"
+                        className={`inline-flex items-center gap-1.5 text-sm font-semibold transition-colors ${
+                          href
+                            ? 'text-green-400 hover:text-green-300'
+                            : 'text-gray-600 cursor-default pointer-events-none'
+                        }`}
+                        aria-disabled={!href}
+                      >
+                        <Download className="w-3.5 h-3.5" />
+                        {d.downloadBtn}
+                      </a>
+                    </div>
                   </div>
+
+                  {/* Inline link editor */}
+                  {isEditing && (
+                    <LinkEditor
+                      links={releaseLinks[i]}
+                      onChange={(v) => updateLink(i, v)}
+                      fabricLabel={d.fabric}
+                      forgeLabel={d.forge}
+                      placeholderFabric={d.placeholderFabric}
+                      placeholderForge={d.placeholderForge}
+                    />
+                  )}
                 </div>
               </Reveal>
             );

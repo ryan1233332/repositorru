@@ -8,7 +8,7 @@ interface ReleaseLink { fabric: string; forge: string }
 // Defina aqui os links do Dropbox para cada versão (Fabric e Forge)
 const releaseLinksData: ReleaseLink[] = [
   { 
-    fabric: 'https://www.dropbox.com/scl/fi/0w5lc57dnfxat4e5w6jfm/CreeperVoiceMod1.21.11-Fabric-V2.5.1.jar.jar?rlkey=467ebgazwj4okyad6iexwimgp&st=xdrfjyq1&raw=1, 
+    fabric: 'https://www.dropbox.com/scl/fi/0w5lc57dnfxat4e5w6jfm/CreeperVoiceMod1.21.11-Fabric-V2.5.1.jar.jar?rlkey=467ebgazwj4okyad6iexwimgp&st=xdrfjyq1&raw=1', 
     forge: 'https://www.dropbox.com/scl/fi/eyy7493k0bv8yykmzv4b5/CreeperVoiceMod1.21.11-Forge-V2.5.1.jar.jar?rlkey=pehibc3n3qxz8214d05u746cw&st=dfygy4ha&raw=1' 
   },
   { 

@@ -81,7 +81,7 @@ export const translations = {
       forge: 'Forge',
       modVersion: 'CreeperVoiceMod 2.5.1',
       mc: 'Minecraft 1.21.11',
-      meta: '2.4 MB · Released Jul 18, 2026',
+      meta: '73.4 MB · Released Jul 22, 2026',
       downloadJar: 'Download .jar',
       changelog: 'Changelog',
       githubAll: 'View all releases on GitHub',
@@ -95,9 +95,9 @@ export const translations = {
       placeholderForge: 'Forge download URL…',
       fileMissing: 'Jar file not uploaded yet — place it in public/downloads/ to enable this button.',
       releases: [
-        { version: '2.5.1', tag: 'Latest', date: 'Jul 18, 2026', size: '2.4 MB', changes: ['Minecraft 1.21.11 support', 'Reduced voice latency by 30%', 'New push-to-talk UI'] },
-        { version: '2.4.0', tag: 'Stable', date: 'Jun 02, 2026', size: '2.3 MB', changes: ['Spatial audio overhaul', 'Added group channels', 'Bug fixes'] },
-        { version: '2.3.2', tag: 'Legacy', date: 'Apr 14, 2026', size: '2.1 MB', changes: ['1.21.5 support', 'Opus codec upgrade'] },
+        { version: '2.5.1', tag: 'Latest', date: 'Jul 22, 2026', size: '73.4 MB', changes: ['Minecraft 1.21.11 support', 'Reduced voice latency by 30%', 'New push-to-talk UI'] },
+        { version: '2.4.0', tag: 'Stable', date: 'Jun 02, 2026', size: '71.2 MB', changes: ['Spatial audio overhaul', 'Added group channels', 'Bug fixes'] },
+        { version: '2.3.2', tag: 'Legacy', date: 'Apr 14, 2026', size: '68.7 MB', changes: ['1.21.5 support', 'Opus codec upgrade'] },
       ],
     },
     // FAQ

@@ -8,23 +8,23 @@ interface ReleaseLink { fabric: string; forge: string }
 // Defina aqui os links do Dropbox para cada versão (Fabric e Forge)
 const releaseLinksData: ReleaseLink[] = [
   { 
-    fabric: 'https://www.dropbox.com/scl/fi/ru8qcgvnad6bgnf7dbjgw/vanilla-voice-mod-mc-1.21.11.fabric.jar?rlkey=396v7um2u05yc2q2tiptpvzkz&st=5gu3gl3z&raw=1', 
-    forge: 'https://www.dropbox.com/scl/fi/EXEMPLO_FORGE_PRINCIPAL/arquivo.jar?rlkey=EXEMPLO&raw=1' 
+    fabric: 'https://www.dropbox.com/scl/fi/0w5lc57dnfxat4e5w6jfm/CreeperVoiceMod1.21.11-Fabric-V2.5.1.jar.jar?rlkey=467ebgazwj4okyad6iexwimgp&st=xdrfjyq1&raw=1, 
+    forge: 'https://www.dropbox.com/scl/fi/eyy7493k0bv8yykmzv4b5/CreeperVoiceMod1.21.11-Forge-V2.5.1.jar.jar?rlkey=pehibc3n3qxz8214d05u746cw&st=dfygy4ha&raw=1' 
   },
   { 
-    fabric: 'https://www.dropbox.com/scl/fi/EXEMPLO_FABRIC_VERSAO_1/arquivo.jar?rlkey=EXEMPLO&raw=1', 
-    forge: 'https://www.dropbox.com/scl/fi/EXEMPLO_FORGE_VERSAO_1/arquivo.jar?rlkey=EXEMPLO&raw=1' 
+    fabric: 'https://www.dropbox.com/scl/fi/0w5lc57dnfxat4e5w6jfm/CreeperVoiceMod1.21.11-Fabric-V2.5.1.jar.jar?rlkey=467ebgazwj4okyad6iexwimgp&st=xdrfjyq1&raw=1', 
+    forge: 'https://www.dropbox.com/scl/fi/eyy7493k0bv8yykmzv4b5/CreeperVoiceMod1.21.11-Forge-V2.5.1.jar.jar?rlkey=pehibc3n3qxz8214d05u746cw&st=dfygy4ha&raw=1' 
   },
   { 
-    fabric: 'https://www.dropbox.com/scl/fi/EXEMPLO_FABRIC_VERSAO_2/arquivo.jar?rlkey=EXEMPLO&raw=1', 
-    forge: 'https://www.dropbox.com/scl/fi/EXEMPLO_FORGE_VERSAO_2/arquivo.jar?rlkey=EXEMPLO&raw=1' 
+    fabric: 'https://www.dropbox.com/scl/fi/0w5lc57dnfxat4e5w6jfm/CreeperVoiceMod1.21.11-Fabric-V2.5.1.jar.jar?rlkey=467ebgazwj4okyad6iexwimgp&st=xdrfjyq1&raw=1', 
+    forge: 'https://www.dropbox.com/scl/fi/eyy7493k0bv8yykmzv4b5/CreeperVoiceMod1.21.11-Forge-V2.5.1.jar.jar?rlkey=pehibc3n3qxz8214d05u746cw&st=dfygy4ha&raw=1' 
   },
 ];
 
 const LOCAL_JARS: Record<string, { fabric: string; forge: string }> = {
   '2.5.1': {
-    fabric: 'https://www.dropbox.com/scl/fi/ru8qcgvnad6bgnf7dbjgw/vanilla-voice-mod-mc-1.21.11.fabric.jar?rlkey=396v7um2u05yc2q2tiptpvzkz&st=5gu3gl3z&raw=1',
-    forge: 'https://www.dropbox.com/scl/fi/EXEMPLO_FORGE_PRINCIPAL/arquivo.jar?rlkey=EXEMPLO&raw=1',
+    fabric: 'https://www.dropbox.com/scl/fi/0w5lc57dnfxat4e5w6jfm/CreeperVoiceMod1.21.11-Fabric-V2.5.1.jar.jar?rlkey=467ebgazwj4okyad6iexwimgp&st=xdrfjyq1&raw=1',
+    forge: 'https://www.dropbox.com/scl/fi/eyy7493k0bv8yykmzv4b5/CreeperVoiceMod1.21.11-Forge-V2.5.1.jar.jar?rlkey=pehibc3n3qxz8214d05u746cw&st=dfygy4ha&raw=1',
   },
 };
 
